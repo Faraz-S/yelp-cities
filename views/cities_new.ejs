@@ -1,0 +1,55 @@
+<%- include("partials/header") %>
+<div class="container">
+  <h1>Add New City</h1>
+  <form action="/cities" method="POST">
+    <div class="mb-3">
+      <label for="name" class="form-label">City</label>
+      <input type="text" class="form-control" name="name" placeholder="e.g. Toronto" autofocus>
+    </div>
+    <div class="mb-3">
+      <label for="country" class="form-label">Country</label>
+      <input type="text" class="form-control" name="country" placeholder="e.g. Canada">
+    </div>
+    <div class="mb-3">
+      <label for="region" class="form-label">Region</label>
+      <select class="form-control" id="region" name="region">
+        <option selected disabled>-- Choose Below --</option>
+        <option>Africa</option>
+        <option>Asia</option>
+        <option>Australia</option>
+        <option>Europe</option>
+        <option>North America</option>
+        <option>South America</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="population" class="form-label">Population</label>
+      <input type="number" class="form-control" name="population">
+    </div>
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <input type="text" class="form-control" name="description">
+    </div>
+    <div class="mb-3">
+      <label for="image" class="form-label">Link to Image</label>
+      <input type="text" class="form-control" name="image" placeholder="https://www.image.com">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+
+  <!-- <h1>Add New City</h1>
+  <form action="/cities" method="POST">
+      <label for="name">Title</label>
+      <input type="text" name="name" autofocus>
+      <label for="description">Description</label>
+      <input type="text" name="description" >
+      <label for="image">Image Link</label>
+      <input type="text" name="image">
+      <br />
+      <br />
+      <button type="submit">Submit</button>
+  </form> -->
+
+
+<%- include("partials/footer") %>

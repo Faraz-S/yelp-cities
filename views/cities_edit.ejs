@@ -1,0 +1,40 @@
+<%- include("partials/header") %>
+<div class="container">
+  <h1>Edit City</h1>
+  <form action="/cities/<%= city._id %>?_method=PUT" method="POST">
+    <div class="mb-3">
+      <label for="name" class="form-label">City</label>
+      <input type="text" class="form-control" name="name" value="<%= city.name %>">
+    </div>
+    <div class="mb-3">
+      <label for="country" class="form-label">Country</label>
+      <input type="text" class="form-control" name="country" value="<%= city.country %>">
+    </div>
+    <div class="mb-3">
+      <label for="region" class="form-label">Region</label>
+      <select class="form-control" id="region" name="region">
+        <option disabled>-- Choose Below --</option>
+        <option <%= city.region === "africa" ?'selected' : ''%>>Africa</option>
+        <option <%= city.region === "asia" ?'selected' : ''%>>Asia</option>
+        <option <%= city.region === "australia" ?'selected' : ''%>>Australia</option>
+        <option <%= city.region === "europe" ?'selected' : ''%>>Europe</option>
+        <option <%= city.region === "north america" ?'selected' : ''%>>North America</option>
+        <option <%= city.region === "south america" ?'selected' : ''%>>South America</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="population" class="form-label">Population</label>
+      <input type="number" class="form-control" name="population" value="<%= city.population %>">
+    </div>
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <input type="text" class="form-control" name="description" value="<%= city.description %>">
+    </div>
+    <div class="mb-3">
+      <label for="image" class="form-label">Link to Image</label>
+      <input type="text" class="form-control" name="image" value="<%= city.image %>">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+<%- include("partials/footer") %>
