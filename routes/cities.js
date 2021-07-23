@@ -74,6 +74,22 @@ router.get("/search", async (req, res) => {
   }
 })
 
+// region
+router.get("/region/:region", async (req, res) => {
+  // Check if the given region is valid
+  const validRegions = ["africa", "asia", "australia", "europe", "north america", "south america"];
+  if(validRegions.includes(req.params.region.toLowerCase())){
+    // If yes, continue
+    const cities = await City.find({region: req.params.region}).exec();
+    res.render("cities", {cities});
+  } else {
+      // If no, send an error
+      res.send("Please enter a valid region")
+  }
+
+
+});
+
 // Show Route
 router.get("/:id", async (req, res) => {
   try {
