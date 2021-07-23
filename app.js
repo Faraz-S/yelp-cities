@@ -13,7 +13,14 @@ const LocalStrategy = require('passport-local').Strategy;
 const expressSession = require('express-session');
 
 // Config Import
-const config = require("./config");
+let config;
+try {
+  config = require("./config");
+} catch (e) {
+  console.log("Could not import config. This probably means you're not working locally")
+  console.log(e);
+}
+
 
 //Route Imports
 const mainRoute = require('./routes/main');
@@ -43,8 +50,14 @@ app.use(morgan('tiny'));
 // Body Parser Config
 app.use(bodyParser.urlencoded({extended: true}));
 
-// Connect to DB
-mongoose.connect(config.db.connection, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
+// Connect to DB (Mongoose Config)
+try {
+  mongoose.connect(config.db.connection, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
+} catch (e) {
+  console.log("Could not connect using config. This probaly means you're not working locally")
+  mongoose.connect(process.env.DB_CONNECTION_STRING, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
+}
+
 
 // Express config
 app.set("view engine", "ejs");
@@ -52,7 +65,7 @@ app.use(express.static('public'));
 
 // Express Session Config
 app.use(expressSession({
-  secret: "ahfohaiohgioahgheioagbo",
+  secret: process.env.ES_SECRET || config.expressSession.secret,
   resave: false,
   saveUninitialized: false
 }));
@@ -83,6 +96,6 @@ app.use("/cities/:id/comments", commentRoutes);
 // =====================
 // LISTEN
 // =====================
-app.listen(3000, () => {
+app.listen(process.env.PORT || 3000, () => {
   console.log("yelp_cities is running");
 });
