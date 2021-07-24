@@ -24,10 +24,12 @@ router.post("/", isLoggedIn, async (req, res) => {
     }) // Can create faster using the spread operator
     console.log(comment);
     // redirect to the show page for the city
+    req.flash("success", "Comment added!");
     res.redirect(`/cities/${req.body.cityId}`)
   } catch (err) {
     console.log(err);
-    res.send("Broken... POST comments")
+    req.flash("error", "Error creating comment");
+    res.redirect("/cities");
   }
 })
 
@@ -50,10 +52,12 @@ router.put("/:commentId", checkCommentOwner, async (req, res) => {
   try {
     const comment = await Comment.findByIdAndUpdate(req.params.commentId, {text: req.body.text}, {new: true});
     console.log("comment:", comment);
+    req.flash("success", "Comment updated!");
     res.redirect(`/cities/${req.params.id}`);
   } catch (err) {
-    console.logg(err);
-    res.send("Broken ... comment PUT")
+    console.log(err);
+    req.flash("error", "Error editing comment");
+    res.redirect("/cities");
   }
 })
 
@@ -62,10 +66,12 @@ router.delete("/:commentId", checkCommentOwner, async (req, res) => {
   try {
     const comment = await Comment.findByIdAndDelete(req.params.commentId).exec();
     console.log("deleted comment", comment);
+    req.flash("success", "Comment deleted!");
     res.redirect(`/cities/${req.params.id}`);
   } catch {
     console.log(err);
-    res.send("Broken ... comment DELETE")
+    req.flash("error", "Error deleting comment");
+    res.redirect("/cities")
   }
 })
 

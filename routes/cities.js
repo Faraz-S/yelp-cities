@@ -37,10 +37,11 @@ router.post("/", isLoggedIn, async (req, res) => {
   try {
       const city = await City.create(newCity)
       console.log(city)
-      res.redirect("/cities/" + city._id)
+      req.flash("success", "City created!");
+      res.redirect("/cities/" + city._id);
   } catch (err){
-    console.log(err);
-    res.send("create route broken .. /cities POST")
+    req.flash("error", "Error creating city")
+    res.redirect("/cities");
   }
   // City.create(newCity)
   // .then((city) => {
@@ -133,10 +134,12 @@ router.put("/:id", checkCityOwner, async (req, res) => {
   try {
     const updatedCity = await City.findByIdAndUpdate(req.params.id, city, {new: true}).exec()
     console.log(updatedCity);
+    req.flash("success", "City updated!");
     res.redirect(`/cities/${req.params.id}`);
   } catch (err) {
     console.log(err);
-    res.send("Update route broken .. /cities/id PUT")
+    req.flash("error", "Error updating city")
+    res.redirect("/cities");
   }
 
   // City.findByIdAndUpdate(req.params.id, city, {new: true})
@@ -154,12 +157,14 @@ router.put("/:id", checkCityOwner, async (req, res) => {
 router.delete("/:id", checkCityOwner, async (req, res) => {
   try {
     const deletedCity = await City.findByIdAndDelete(req.params.id).exec()
-    console.log("Deleted: ", deletedCity);
+    // console.log("Deleted: ", deletedCity);
+    req.flash("success", "City deleted!");
     res.redirect("/cities")
 
   } catch (err) {
     console.log(err);
-    res.send("Delete route broken .. /cities/id DELETE");
+    req.flash("error", "Error deleting city");
+    res.redirect("back");
   }
 
   // City.findByIdAndDelete(req.params.id)

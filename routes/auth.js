@@ -10,14 +10,15 @@ router.get('/signup', (req, res) => {
   res.render('signup');
 })
 
-// Sign Up = Create
+// Sign Up - Create
 router.post('/signup', async (req, res) => {
   try {
     const newUser = await User.register(new User({
       username: req.body.username,
       email: req.body.email
     }), req.body.password);
-    console.log(newUser);
+    // console.log(newUser);
+    req.flash("success", `Signed up as ${newUser.username}`);
 
     passport.authenticate('local')(req, res, () => {
       res.redirect('/cities');
@@ -36,12 +37,15 @@ router.get('/login', (req, res) => {
 // Login
 router.post("/login", passport.authenticate('local', {
   successRedirect: '/cities',
-  failureRedirect: '/login'
+  failureRedirect: '/login',
+  successFlash: "Logged in successfully",
+  failureFlash: true
 }));
 
 // Logout
 router.get('/logout', (req, res) => {
   req.logout();
+  req.flash("success", "Looged you out!");
   res.redirect('/cities');
 })
 
