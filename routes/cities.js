@@ -93,6 +93,13 @@ router.get("/region/:region", async (req, res) => {
 
 });
 
+// Vote
+router.post("/vote", isLoggedIn, (req, res) => {
+  res.json({
+    message: "Voted"
+  });
+})
+
 // Show Route
 router.get("/:id", async (req, res) => {
   try {
