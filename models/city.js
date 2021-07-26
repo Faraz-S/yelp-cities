@@ -13,7 +13,9 @@ const citySchema = new mongoose.Schema({
       ref: "User"
     },
     username: String
-  }
+  },
+  upvotes: [String],
+  downvotes: [String]
 });
 
 citySchema.index({
