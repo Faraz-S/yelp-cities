@@ -102,9 +102,50 @@ router.post("/vote", isLoggedIn, async (req, res) => {
   // }
 
   const city = await City.findById(req.body.cityId);
-  console.log(city);
+  const alreadyUpvoted = city.upvotes.indexOf(req.user.username);
+  const alreadyDownvoted = city.downvotes.indexOf(req.user.username);
 
-  res.json(city);
+  let response = {};
+  // Voting logic
+  if(alreadyUpvoted == -1 && alreadyDownvoted == -1) { // Has not voted
+    if (req.body.voteType === "up") { // Upvoting
+      city.upvotes.push(req.user.username);
+      city.save();
+      response.message = "Upvote tallied";
+    } else if (req.body.voteType === "down") { // Downvoting
+      city.downvotes.push(req.user.username);
+      city.save();
+      response.message = "Downvote tallied";
+    } else {
+      response.message = "Error 1";
+    }
+  } else if (alreadyUpvoted >= 0) { // Already upvoted
+    city.upvotes.splice(alreadyUpvoted, 1);
+    if (req.body.voteType === "up") { // Remove upvote
+      response.message = "Upvote removed";
+    } else if (req.body.voteType === "down") {
+      city.downvotes.push(req.user.username);
+      response.message = "Changed to downvote";
+    } else {
+      response.message = "Error 2";
+    }
+    city.save();
+  } else if (alreadyDownvoted >= 0) { // Already downvoted
+    city.downvotes.splice(alreadyDownvoted, 1);
+    if (req.body.voteType === "up") {
+      city.upvotes.push(req.user.username);
+      response.message = "Changed to upvote";
+    } else if (req.body.voteType === "down") { // Remove downvote
+      response.message = "Downvote removed";
+    } else {
+      response.message = "Error 3";
+    }
+    city.save();
+  } else { //Error
+    response.message = "Error 4, should not reach here";
+  }
+
+  res.json(response);
 })
 
 // Show Route
