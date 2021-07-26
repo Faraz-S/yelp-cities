@@ -94,11 +94,17 @@ router.get("/region/:region", async (req, res) => {
 });
 
 // Vote
-router.post("/vote", isLoggedIn, (req, res) => {
-  console.log(req.body);
-  res.json({
-    message: "Voted"
-  });
+router.post("/vote", isLoggedIn, async (req, res) => {
+  console.log("Request body: ", req.body);
+  // {
+  //   cityId: "abc123",
+  //   voteType: "up" or "down"
+  // }
+
+  const city = await City.findById(req.body.cityId);
+  console.log(city);
+
+  res.json(city);
 })
 
 // Show Route

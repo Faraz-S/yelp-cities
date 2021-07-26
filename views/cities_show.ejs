@@ -44,7 +44,7 @@
       <span id="score" class="mx-2">10</span>
       <% if(user) { %>
         <button id="downvote_btn" class="btn btn-outline-danger btn-lg mt-3">-</button>
-      <% } %>  
+      <% } %>
     </div>
   </div>
   <% comments.forEach((comment) => { %>
@@ -69,5 +69,8 @@
   <% }) %>
   <div class="py-5"></div>
 </div>
+<script>
+  var cityId = "<%- city._id %>"
+</script>
 <script src="/js/cities_show.js"></script>
 <%- include("partials/footer") %>
