@@ -1,13 +1,49 @@
 <%- include('partials/header') %>
-<h1>
-  Sign Up
-</h1>
-<form action="/signup" method="post">
-  <input type="email" name="email" placeholder="Email Address">
-  <input type="text" name="username" placeholder="Username">
-  <input type="password" name="password" placeholder="Password">
-  <button type="submit">Sign Up</button>
-</form>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-4 p-0 ">
+        <div class="bg-dark text-white info text-center align-items-center">
+          <h1 style="font-size: 5rem;">YelpCities</h1>
+          <h5>Discover new destinations around the globe</h5>
+          <h5>View user-added cities or add your own</h5>
+          <h5>See what each city has to offer</h5>
+        </div>
+      </div>
 
-
+      <div class="col-md-8 d-flex align-items-center justify-content-center bg-light p-0">
+        <div class="card shadow border-light p-2" style="width: 20rem;"">
+          <div class="card-body">
+            <h5 class="card-title" id="loginTitle">Create Your Account</h5>
+            <form action="/signup" method="POST" class="row needs-validation" novalidate>
+              <div class="col-md-12 mt-2">
+                <label for="validationCustom01" class="form-label">Email Address</label>
+                <input type="email" name="email" class="form-control" id="validationCustom01" required>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+              </div>
+              <div class="col-md-12 mt-2">
+                <label for="validationCustom02" class="form-label">Username</label>
+                <input type="text" name="username" class="form-control" id="validationCustom02" required>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+              </div>
+              <div class="col-md-12 mt-2">
+                <label for="validationCustom03" class="form-label">Password</label>
+                <input type="password" name="password" class="form-control" id="validationCustom03" required>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+              </div>
+              <div class="col-12 mt-3">
+                <button class="btn btn-primary w-100" type="submit">Sign Up</button>
+              </div>
+            </form>
+            <p class="text-center">Already have an account? <a href="/login">Login</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 <%- include('partials/footer') %>

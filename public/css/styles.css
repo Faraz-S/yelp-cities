@@ -8,6 +8,10 @@ body {
   width: 30%;
 }
 
+#signupCard {
+  border-radius: 1rem;
+}
+
 .card-img {
   width: 100%;
   height: 20rem;
@@ -20,6 +24,9 @@ body {
   font-family: 'Red Rose', sans-serif;
   font-weight: 400;
   font-size: 1.8rem;
+}
+h5.card-title {
+  font-family: 'Roboto', sans-serif;
 }
 
 .card-text {
@@ -64,4 +71,14 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
+}
+
+.info {
+  height: calc(100vh - 78px);
+  margin: auto;
+  padding: 40% 0;
+}
+
+#signupCard {
+  padding: 40% 0;
 }
