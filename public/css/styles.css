@@ -27,7 +27,41 @@ body {
   line-height: 1.4;
 }
 
+.landing {
+  /* text-align: center; */
+  font-size: 5rem;
+}
+
 /* show_cities */
 .show_image-container img {
   width: 80%;
+}
+
+/* Carousel */
+#carouselExampleCaptions,
+.carousel-inner,
+.carousel-item,
+.carousel-item.active {
+  height: calc(100vh - 70px);
+}
+
+.carousel-item:nth-child(1) {
+  background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Toronto_Skyline_Summer_2020.jpg/1200px-Toronto_Skyline_Summer_2020.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+
+.carousel-item:nth-child(2) {
+  background-image: url('https://alumni.umich.edu/wp-content/uploads/Michigan-Basketball-in-London-2.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+
+.carousel-item:nth-child(3) {
+  background-image: url('https://cdn.turkishairlines.com/m/59100baee0551af9/original/Travel-Guide-of-Los-Angeles-via-Turkish-Airlines.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
 }
