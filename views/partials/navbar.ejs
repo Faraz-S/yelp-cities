@@ -1,7 +1,8 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="/cities">
       <img src="/img/folded-map.svg" alt="Brand Image" height="40" width="50">
+      YelpCities
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -52,16 +53,16 @@
   <% if(errorMessage && errorMessage.length > 0) { %>
     <div class="alert alert-warning alert-dismissible fade show" role="alert">
       <%= errorMessage %>
-      <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+        <!-- <span aria-hidden="true">&times;</span> -->
       </button>
     </div>
   <% } %>
   <% if(successMessage && successMessage.length > 0) { %>
     <div class="alert alert-success alert-dismissible fade show" role="alert">
       <%= successMessage %>
-      <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+        <!-- <span aria-hidden="true">&times;</span> -->
       </button>
     </div>
   <% } %>

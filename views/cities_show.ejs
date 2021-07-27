@@ -42,12 +42,16 @@
         <button id="upvote_btn" class="btn btn-success btn-lg mt-3">+</button>
       <% } else if(user) { %>
         <button id="upvote_btn" class="btn btn-outline-success btn-lg mt-3">+</button>
+      <% } else { %>
+        <button id="upvote_btn" type="button" class="btn btn-outline-success btn-lg mt-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Login to vote" disabled>+</button>
       <% } %>
       <span id="score" class="mx-2"><%= city.upvotes.length - city.downvotes.length %></span>
       <% if(user && city.downvotes.indexOf(user.username) >= 0) { %>
         <button id="downvote_btn" class="btn btn-danger btn-lg mt-3">-</button>
       <% } else if(user) { %>
         <button id="downvote_btn" class="btn btn-outline-danger btn-lg mt-3">-</button>
+      <% } else { %>
+        <button id="downvote_btn" type="button" class="btn btn-outline-danger btn-lg mt-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Login to vote" disabled>-</button>
       <% } %>
     </div>
   </div>
