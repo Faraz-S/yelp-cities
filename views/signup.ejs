@@ -21,6 +21,9 @@
                 <div class="valid-feedback">
                   Looks good!
                 </div>
+                <div class="invalid-feedback">
+                  Please enter a valid email
+                </div>
               </div>
               <div class="col-md-12 mt-2">
                 <label for="validationCustom02" class="form-label">Username</label>
@@ -28,12 +31,15 @@
                 <div class="valid-feedback">
                   Looks good!
                 </div>
+                <div class="invalid-feedback">
+                  Please enter a username
+                </div>
               </div>
               <div class="col-md-12 mt-2">
                 <label for="validationCustom03" class="form-label">Password</label>
                 <input type="password" name="password" class="form-control" id="validationCustom03" required>
-                <div class="valid-feedback">
-                  Looks good!
+                <div class="invalid-feedback">
+                  Please enter a password
                 </div>
               </div>
               <div class="col-12 mt-3">
@@ -46,4 +52,5 @@
       </div>
     </div>
   </div>
+  <script src="/js/signup.js"></script>
 <%- include('partials/footer') %>
