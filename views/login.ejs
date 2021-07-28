@@ -1,10 +1,24 @@
 <%- include('partials/header') %>
-<h1>
-  Login
-</h1>
-<form action="/login" method="post">
-  <input type="text" name="username" placeholder="Username">
-  <input type="password" name="password" placeholder="Password">
-  <button type="submit">Login</button>
-</form>
+<div class="container-fluid">
+  <div class="d-flex justify-content-center align-items-center bg-light" style="height: calc(100vh - 78px);">
+    <div class="card shadow border-light p-2" style="width: 20rem;">
+      <div class="card-body">
+        <h5 class="card-title mb-3" id="loginTitle">Welcome Back</h5>
+        <form action="/login" method="post">
+        <div class="form-floating mb-3">
+          <input type="text" name="username" class="form-control" id="floatingInput" placeholder="Username">
+          <label for="floatingInput">Username</label>
+        </div>
+        <div class="form-floating">
+          <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
+          <label for="floatingPassword">Password</label>
+        </div>
+        <button class="btn btn-primary w-100 mt-3" type="submit">Log In</button>
+        </form>
+        <p class="text-center">Don't have an account? <a href="/signup">Sign Up</a></p>
+      </div>
+    </div>
+  </div>
+
+</div>
 <%- include('partials/footer') %>
