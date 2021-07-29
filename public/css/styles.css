@@ -3,25 +3,21 @@ body {
 }
 
 .card {
-  border: 1px solid #ddd;
-  border-radius: 1rem;
+  /* border: 1px solid #ddd; */
+  /* border-radius: 1rem; */
   width: 30%;
-}
-
-#signupCard {
-  border-radius: 1rem;
 }
 
 .card-img {
   width: 100%;
   height: 20rem;
   object-fit: cover;
-  border-radius: 1rem 1rem 0 0;
+  /* border-radius: 1rem 1rem 0 0; */
 }
 
 .card-title {
   text-align: center;
-  font-family: 'Red Rose', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: 400;
   font-size: 1.8rem;
 }
@@ -81,4 +77,5 @@ h5.card-title {
 
 #signupCard {
   padding: 40% 0;
+  border-radius: 1rem;
 }

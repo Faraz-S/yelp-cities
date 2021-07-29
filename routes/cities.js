@@ -22,7 +22,7 @@ router.post("/", isLoggedIn, async (req, res) => {
   const region = req.body.region.toLowerCase();
   const country = req.body.country.toLowerCase();
   const newCity = {
-    name: req.body.name,
+    name: req.body.name.toLowerCase(),
     country, // country on its own is the same as country: country
     description: req.body.description,
     image: req.body.image,
@@ -157,10 +157,10 @@ router.get("/:id", async (req, res) => {
     console.log("id: ", req.params.id);
     const city = await City.findById(req.params.id).exec();
     const comments = await Comment.find({cityId: req.params.id});
-    res.render("cities_show", {city, comments});
+    res.render("cities_show", {city, comments, cityId: req.params.id});
   } catch (err) {
     console.log(err);
-    res.send("Show route broken .. /cities/id");
+    res.send(err);
   }
 })
 
