@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const City = require('../models/city');
+const {City, citySchema} = require('../models/city');
 const Comment = require('../models/comment');
 const User = require('../models/user');
 const passport = require('passport');
@@ -15,7 +15,8 @@ router.post('/signup', async (req, res) => {
   try {
     const newUser = await User.register(new User({
       username: req.body.username,
-      email: req.body.email
+      email: req.body.email,
+      watchlist: []
     }), req.body.password);
     // console.log(newUser);
     req.flash("success", `Signed up as ${newUser.username}`);

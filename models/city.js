@@ -23,4 +23,4 @@ citySchema.index({
 });
 const City = mongoose.model("city", citySchema)
 
-module.exports = City;
+module.exports = {City, citySchema};

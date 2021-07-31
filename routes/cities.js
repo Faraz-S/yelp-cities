@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const City = require('../models/city');
+const {City, citySchema} = require('../models/city');
 const Comment = require('../models/comment');
 const isLoggedIn = require('../utils/isLoggedIn');
 const checkCityOwner = require('../utils/checkCityOwner')
@@ -84,6 +84,7 @@ router.get("/region/:region", async (req, res) => {
   if(validRegions.includes(req.params.region.toLowerCase())){
     // If yes, continue
     const cities = await City.find({region: req.params.region}).exec();
+    console.log(cities);
     res.render("cities", {cities});
   } else {
       // If no, send an error
@@ -156,6 +157,7 @@ router.get("/:id", async (req, res) => {
   try {
     console.log("id: ", req.params.id);
     const city = await City.findById(req.params.id).exec();
+    // console.log(city);
     const comments = await Comment.find({cityId: req.params.id});
     res.render("cities_show", {city, comments, cityId: req.params.id});
   } catch (err) {

@@ -34,6 +34,20 @@
     </div>
   </div>
   <div class="row">
+    <!-- <a href="#" class="col-3">
+      <button type="button" id="watchlist_btn" class="btn btn-success btn-lg mt-3 mb-4">Add To Watchlist</button>
+    </a> -->
+    <% if(user && user.watchlist.some(e => e._id.equals(city._id))) { %>
+      <form class="col-3" action="/account/watchlist?_method=DELETE" method="POST">
+        <input type="hidden" name="cityId" value="<%= city._id %>">
+        <button type="submit" class="btn btn-danger btn-lg mt-3 mb-4">Delete From Watchlist</button>
+      </form>
+    <% } else { %>
+      <form class="col-3" action="/account/watchlist" method="POST">
+        <input type="hidden" name="cityId" value="<%= city._id %>">
+        <button type="submit" class="btn btn-success btn-lg mt-3 mb-4">Add To Watchlist</button>
+      </form>
+    <% } %>
     <div class="col-2 mb-2">
       <% if(user && city.upvotes.indexOf(user.username) >= 0) { %>
         <button id="upvote_btn" class="btn btn-success btn-lg mt-3">+</button>
@@ -67,7 +81,7 @@
           </div>
           <div class="card-footer mb-0">
             <input type="hidden" name="cityId" value="<%= cityId %>">
-            <button type="submit" class="btn btn-primary">Submit Comment</button>
+            <button type="submit" class="btn btn-primary">Comment</button>
           </div>
         </form>
       </div>

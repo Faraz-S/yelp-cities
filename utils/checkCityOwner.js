@@ -1,4 +1,4 @@
-const City = require('../models/city');
+const {City, citySchema} = require('../models/city');
 
 const checkCityOwner = async (req, res, next) => {
   if(req.isAuthenticated()) { // Check if the user is logged in

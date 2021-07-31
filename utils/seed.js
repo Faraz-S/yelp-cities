@@ -1,4 +1,4 @@
-const City = require('../models/city');
+const {City, citySchema} = require('../models/city');
 const Comment = require('../models/comment');
 
 

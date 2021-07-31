@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router({mergeParams: true});
 const Comment = require('../models/comment');
-const City = require('../models/city');
+const {City, citySchema} = require('../models/city');
 const isLoggedIn = require('../utils/isLoggedIn');
 const checkCommentOwner = require('../utils/checkCommentOwner');
 
