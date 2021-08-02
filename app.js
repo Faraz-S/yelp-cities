@@ -22,7 +22,6 @@ try {
   console.log(e);
 }
 
-
 //Route Imports
 const mainRoute = require('./routes/main');
 const cityRoutes = require('./routes/cities');

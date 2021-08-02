@@ -4,6 +4,25 @@ const {City, citySchema} = require('../models/city');
 const Comment = require('../models/comment');
 const isLoggedIn = require('../utils/isLoggedIn');
 const checkCityOwner = require('../utils/checkCityOwner')
+const fetch = require('node-fetch');
+
+// Config Import
+let config;
+try {
+  config = require("../config");
+} catch (e) {
+  console.log("Could not import config. This probably means you're not working locally")
+  console.log(e);
+}
+
+// Api Key Import
+let API_KEY;
+try {
+  API_KEY = config.weatherAPI.API_KEY;
+} catch (e) {
+  console.log("Could not connect using config. This probaly means you're not working locally")
+  API_KEY = process.env.API_KEY;
+}
 
 // Index Route
 router.get("/", async (req, res) => {
@@ -157,9 +176,18 @@ router.get("/:id", async (req, res) => {
   try {
     console.log("id: ", req.params.id);
     const city = await City.findById(req.params.id).exec();
-    // console.log(city);
     const comments = await Comment.find({cityId: req.params.id});
-    res.render("cities_show", {city, comments, cityId: req.params.id});
+    fetch(`http://api.weatherstack.com/current?access_key=${API_KEY}&query=${city.name}`)
+      .then((data) => {
+        return data.json();
+      })
+      .then((data) => {
+        res.render("cities_show", {city, comments, data, cityId: req.params.id});
+        console.log(data)
+      })
+      .catch((err) => {
+        res.send(err);
+      })
   } catch (err) {
     console.log(err);
     res.send(err);

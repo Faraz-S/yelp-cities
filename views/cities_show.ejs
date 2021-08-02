@@ -5,7 +5,23 @@
       <img src="<%= city.image %>" alt="Picture of the city">
     </div>
     <div class="col-6 show_details-container">
-      <h1 class="text-capitalize"><%= city.name %></h1>
+      <div class="card w-100 bg-dark">
+        <div class="card-body text-white">
+          <h5 class="card-title text-white"><%= data.location.name%>, <%= data.location.country %></h5>
+          <h6 class="card-subtitle mb-2 text-light text-center"><%= data.location.localtime%> (GMT<%=data.location.utc_offset%>)</h6>
+          <div class="d-flex flex-row justify-content-between">
+            <div class="">
+              <img src="<%= data.current.weather_icons[0]%>" alt="Icon representing current weather">
+              <figcaption><%= data.current.weather_descriptions[0]%></figcaption>
+            </div>
+            <h1 class="temp"><%= data.current.temperature%>°C</h1>
+            <ul class="no-bullets">
+              <li>Wind: <%= data.current.wind_speed%> km/h</li>
+              <li>Feels like <%= data.current.feelslike%>°C</li>
+            </ul>
+          </div>
+        </div>
+      </div>
       <p><%= city.description %></p>
       <table class="table">
         <tbody>
