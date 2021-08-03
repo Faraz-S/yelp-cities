@@ -88,8 +88,6 @@
       <div class="card mb-2 w-100 p-0 m-0">
         <form class="m-0" action="/cities/<%= cityId %>/comments" method="POST">
           <div class="card-body p-0 m-0">
-            <!-- <h5 class="card-title">Special title treatment</h5> -->
-            <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
             <div class="form-group">
               <label class="visually-hidden" for="text">Comment Text</label>
               <textarea class = "form-control" name="text" id="text" rows="8" cols="80" placeholder="Comment text here..." required></textarea>
@@ -114,15 +112,25 @@
         <p class="card-text"><%= comment.text %></p>
         <% if(user && user.username === comment.user.username) { %>
           <div class="d-flex flex-row">
-            <a class="btn btn-sm btn-secondary my-1 mx-2" href="/cities/<%= city._id %>/comments/<%= comment._id %>/edit">
-              Edit
-            </a>
+            <p>
+              <button class="btn btn-sm btn-secondary my-1 mx-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                Edit
+              </button>
+            </p>
             <form class="my-1" action="/cities/<%= city._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
               <button class="btn btn-sm btn-danger ">Delete</button>
             </form>
           </div>
+          <div class="collapse" id="collapseExample">
+            <form action="/cities/<%= city._id %>/comments/<%= comment._id %>?_method=PUT" method="POST">
+              <div class="form-group">
+                <label class="visually-hidden" for="text">Comment Text</label>
+                <textarea class = "form-control" name="text" id="text" rows="2" cols="80" required><%= comment.text %></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary mt-2">Edit Comment</button>
+            </form>
+          </div>
           <% } %>
-        <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
       </div>
     </div>
   <% }) %>
