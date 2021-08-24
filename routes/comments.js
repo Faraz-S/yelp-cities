@@ -4,6 +4,7 @@ const Comment = require('../models/comment');
 const {City, citySchema} = require('../models/city');
 const isLoggedIn = require('../utils/isLoggedIn');
 const checkCommentOwner = require('../utils/checkCommentOwner');
+const mongoose = require('mongoose');
 
 // New Comment - Show Form
 router.get("/new", isLoggedIn, (req, res) => {
@@ -21,6 +22,8 @@ router.post("/", isLoggedIn, async (req, res) => {
       },
       text: req.body.text,
       cityId: req.body.cityId,
+      upvotes: [req.user.username],
+      downvotes: []
     }) // Can create faster using the spread operator
     console.log(comment);
     // redirect to the show page for the city
@@ -73,6 +76,65 @@ router.delete("/:commentId", checkCommentOwner, async (req, res) => {
     req.flash("error", "Error deleting comment");
     res.redirect("/cities")
   }
+})
+
+// Vote
+router.post("/vote", isLoggedIn, async (req, res) => {
+  console.log("Request body: ", req.body);
+  // {
+  //   cityId: "abc123",
+  //   voteType: "up" or "down"
+  // }
+
+  const cmntId = mongoose.Types.ObjectId(req.body.commentId);
+  const comment = await Comment.findById(cmntId);
+  const alreadyUpvoted = comment.upvotes.indexOf(req.user.username);
+  const alreadyDownvoted = comment.downvotes.indexOf(req.user.username);
+
+  let response = {};
+  // Voting logic
+  if(alreadyUpvoted == -1 && alreadyDownvoted == -1) { // Has not voted
+    if (req.body.voteType === "up") { // Upvoting
+      comment.upvotes.push(req.user.username);
+      comment.save();
+      response = {message: "Upvote tallied", code: 1};
+    } else if (req.body.voteType === "down") { // Downvoting
+      comment.downvotes.push(req.user.username);
+      comment.save();
+      response = {message: "Downvote tallied", code: -1};
+    } else {
+      response = {message: "Error 1", code: "err"};
+    }
+  } else if (alreadyUpvoted >= 0) { // Already upvoted
+    comment.upvotes.splice(alreadyUpvoted, 1);
+    if (req.body.voteType === "up") { // Remove upvote
+      response = {message: "Upvote removed", code: 0};
+    } else if (req.body.voteType === "down") {
+      comment.downvotes.push(req.user.username);
+      response = {message: "Changed to downvote", code: -1};
+    } else {
+      response = {message: "Error 2", code: "err"};
+    }
+    comment.save();
+  } else if (alreadyDownvoted >= 0) { // Already downvoted
+    comment.downvotes.splice(alreadyDownvoted, 1);
+    if (req.body.voteType === "up") {
+      comment.upvotes.push(req.user.username);
+      response = {message: "Changed to upvote", code: 1};
+    } else if (req.body.voteType === "down") { // Remove downvote
+      response = {message: "Downvote removed", code: 0};
+    } else {
+      response = {message: "Error 3", code: "err"};
+    }
+    comment.save();
+  } else { //Error
+    response = {message: "Error 4, should not reach here", code: "err"};
+  }
+
+  // Update score immediately prior to sending
+  response.score = comment.upvotes.length - comment.downvotes.length;
+
+  res.json(response);
 })
 
 module.exports = router;

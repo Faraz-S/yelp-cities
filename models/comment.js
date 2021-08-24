@@ -12,7 +12,9 @@ const commentSchema = new mongoose.Schema({
     cityId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "City"
-    }
+    },
+    upvotes: [String],
+    downvotes: [String]
 
 });
 
