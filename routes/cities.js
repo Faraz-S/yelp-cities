@@ -177,17 +177,18 @@ router.get("/:id", async (req, res) => {
     console.log("id: ", req.params.id);
     const city = await City.findById(req.params.id).exec();
     const comments = await Comment.find({cityId: req.params.id});
-    fetch(`http://api.weatherstack.com/current?access_key=${API_KEY}&query=${city.name}`)
-      .then((data) => {
-        return data.json();
-      })
-      .then((data) => {
-        res.render("cities_show", {city, comments, data, cityId: req.params.id});
-        console.log(data)
-      })
-      .catch((err) => {
-        res.send(err);
-      })
+    // fetch(`http://api.weatherstack.com/current?access_key=${API_KEY}&query=${city.name}`)
+    //   .then((data) => {
+    //     return data.json();
+    //   })
+    //   .then((data) => {
+    //     res.render("cities_show", {city, comments, data, cityId: req.params.id});
+    //     console.log(data)
+    //   })
+    //   .catch((err) => {
+    //     res.send(err);
+    //   })
+      res.render("cities_show", {city, comments, cityId: req.params.id});
   } catch (err) {
     console.log(err);
     res.send(err);
