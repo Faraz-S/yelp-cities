@@ -5,23 +5,7 @@
       <img src="<%= city.image %>" alt="Picture of the city">
     </div>
     <div class="col-6 show_details-container">
-      <div class="card w-100 bg-dark">
-        <div class="card-body text-white">
-          <h5 class="card-title text-white"><%= data.location.name%>, <%= data.location.country %></h5>
-          <h6 class="card-subtitle mb-2 text-light text-center"><%= data.location.localtime%> (GMT<%=data.location.utc_offset%>)</h6>
-          <div class="d-flex flex-row justify-content-between">
-            <div class="">
-              <img src="<%= data.current.weather_icons[0]%>" alt="Icon representing current weather">
-              <figcaption><%= data.current.weather_descriptions[0]%></figcaption>
-            </div>
-            <h1 class="temp"><%= data.current.temperature%>°C</h1>
-            <ul class="no-bullets">
-              <li>Wind: <%= data.current.wind_speed%> km/h</li>
-              <li>Feels like <%= data.current.feelslike%>°C</li>
-            </ul>
-          </div>
-        </div>
-      </div>
+
       <p><%= city.description %></p>
       <table class="table">
         <tbody>
@@ -89,7 +73,7 @@
       </div>
     </div>
   <% } else { %>
-    <p><a href="/login">Login</a> to add your own comment</p>
+    <p><a href="/login">Login</a> to add your own comment and vote on other comments</p>
   <% } %>
 
   <% comments.forEach((comment) => { %>
@@ -122,14 +106,27 @@
       </div>
       <div class="card-footer">
         <div class="voting d-flex flex-row">
-          <button class="<%=comment._id%> upvote_btn btn btn-outline-success btn-sm me-1 p-0">
+          <% if(user && comment.upvotes.indexOf(user.username) >= 0) { %>
+            <button class="<%=comment._id%> upvote_btn btn btn-success btn-sm me-1 p-0">
+          <% } else if(user) { %>
+            <button class="<%=comment._id%> upvote_btn btn btn-outline-success btn-sm me-1 p-0">
+          <% } else { %>
+            <button class="<%=comment._id%> upvote_btn btn btn-outline-success btn-sm me-1 p-0" disabled>
+          <% } %>
             <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-arrow-up-short" viewBox="0 0 16 16">
               <path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5z"/>
             </svg>
           </button>
 
           <span class="score"><%= comment.upvotes.length - comment.downvotes.length %></span>
-          <button class="downvote_btn btn btn-outline-danger btn-sm ms-1 p-0">
+
+          <% if(user && comment.downvotes.indexOf(user.username) >= 0) { %>
+            <button class="downvote_btn btn btn-danger btn-sm ms-1 p-0">
+          <% } else if(user) { %>
+            <button class="downvote_btn btn btn-outline-danger btn-sm ms-1 p-0">
+          <% } else { %>
+            <button class="downvote_btn btn btn-outline-danger btn-sm ms-1 p-0" disabled>
+          <% } %>
             <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-arrow-down-short" viewBox="0 0 16 16">
               <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4z"/>
             </svg>
