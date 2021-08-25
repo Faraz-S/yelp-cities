@@ -76,35 +76,27 @@
     <p><a href="/login">Login</a> to add your own comment and vote on other comments</p>
   <% } %>
 
+  <% let x = 0; %>
+  <% let collapseId = ""; %>
   <% comments.forEach((comment) => { %>
-    <div class="card mb-2 w-100">
-      <h5 class="card-header"><%= comment.user.username %></h5>
-      <div class="card-body">
+
+    <% collapseId = "collapseExample" + x; %>
+    <div class="card border-dark mb-2 w-100">
+      <h5 class="card-header bg-transparent border-0"><%= comment.user.username %></h5>
+      <div class="card-body bg-transparent">
         <!-- <h5 class="card-title">Special title treatment</h5> -->
         <p class="card-text comment-text"><%= comment.text %></p>
-        <% if(user && user.username === comment.user.username) { %>
-          <div class="d-flex flex-row">
-            <p>
-              <button class="btn btn-sm btn-secondary my-1 mx-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                Edit
-              </button>
-            </p>
-            <form class="my-1" action="/cities/<%= city._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
-              <button class="btn btn-sm btn-danger ">Delete</button>
-            </form>
-          </div>
-          <div class="collapse" id="collapseExample">
-            <form action="/cities/<%= city._id %>/comments/<%= comment._id %>?_method=PUT" method="POST">
-              <div class="form-group">
-                <label class="visually-hidden" for="text">Comment Text</label>
-                <textarea class = "form-control" name="text" id="text" rows="2" cols="80" required autofocus><%= comment.text %></textarea>
-              </div>
-              <button type="submit" class="btn btn-primary mt-2">Edit Comment</button>
-            </form>
-          </div>
-          <% } %>
       </div>
-      <div class="card-footer">
+      <div class="card-footer bg-transparent border-0">
+        <div class="collapse" id="<%= collapseId %>">
+          <form action="/cities/<%= city._id %>/comments/<%= comment._id %>?_method=PUT" method="POST">
+            <div class="form-group">
+              <label class="visually-hidden" for="text">Comment Text</label>
+              <textarea class = "form-control" name="text" id="text" rows="2" cols="80" required autofocus><%= comment.text %></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary mt-2">Edit Comment</button>
+          </form>
+        </div>
         <div class="voting d-flex flex-row">
           <% if(user && comment.upvotes.indexOf(user.username) >= 0) { %>
             <button class="<%=comment._id%> upvote_btn btn btn-success btn-sm me-1 p-0">
@@ -131,10 +123,33 @@
               <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4z"/>
             </svg>
           </button>
+          <% if(user && user.username === comment.user.username) { %>
+            <!-- <div class="d-flex flex-row"> -->
+              <!-- <p> -->
+
+              <span class="align-items-center" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit comment">
+                <button class="btn btn-sm btn-light p-0 ms-1" type="button" data-bs-toggle="collapse" data-bs-target="#<%= collapseId %>" aria-expanded="false" aria-controls="<%= collapseId %>">
+                  <i class="fas fa-edit fa-lg"></i>
+                </button>
+              </span>
+
+              <!-- </p> -->
+              <span data-bs-toggle="tooltip" data-bs-placement="top" title="Delete comment">
+                <form class="mt-1 mb-0 ms-1" action="/cities/<%= city._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
+                  <button class="btn btn-sm btn-light p-0">
+                    <i class="fas fa-trash-alt fa-lg"></i>
+                  </button>
+                </form>
+              </span>
+
+            <!-- </div> -->
+
+            <% } %>
         </div>
+
       </div>
     </div>
-  <% }) %>
+  <% x++; }) %>
   <div class="py-5"></div>
 </div>
 <script>
