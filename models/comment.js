@@ -14,7 +14,8 @@ const commentSchema = new mongoose.Schema({
       ref: "City"
     },
     upvotes: [String],
-    downvotes: [String]
+    downvotes: [String],
+    date: String
 
 });
 

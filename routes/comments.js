@@ -15,6 +15,12 @@ router.get("/new", isLoggedIn, (req, res) => {
 router.post("/", isLoggedIn, async (req, res) => {
   try {
     // Create the comment
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    const d = new Date();
+    const year = d.getFullYear();
+    const month = months[d.getMonth()];
+    const day = d.getDate();
+    const date = `${month} ${day}, ${year}`;
     const comment = await Comment.create({
       user: {
         id: req.user._id,
@@ -23,7 +29,8 @@ router.post("/", isLoggedIn, async (req, res) => {
       text: req.body.text,
       cityId: req.body.cityId,
       upvotes: [req.user.username],
-      downvotes: []
+      downvotes: [],
+      date
     }) // Can create faster using the spread operator
     console.log(comment);
     // redirect to the show page for the city
