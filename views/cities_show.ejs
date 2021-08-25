@@ -62,7 +62,7 @@
           <div class="card-body p-0 m-0">
             <div class="form-group">
               <label class="visually-hidden" for="text">Comment Text</label>
-              <textarea class = "form-control" name="text" id="text" rows="8" cols="80" placeholder="Comment text here..." required></textarea>
+              <textarea class = "form-control" name="text" id="text" rows="6" cols="80" placeholder="Comment text here..." required></textarea>
             </div>
           </div>
           <div class="card-footer mb-0">
@@ -81,11 +81,19 @@
   <% comments.forEach((comment) => { %>
 
     <% collapseId = "collapseExample" + x; %>
-    <div class="card border-dark mb-2 w-100">
-      <h5 class="card-header bg-transparent border-0"><%= comment.user.username %></h5>
-      <div class="card-body bg-transparent">
-        <!-- <h5 class="card-title">Special title treatment</h5> -->
-        <p><%= comment.date %></p>
+    <div class="card shadow mb-2 w-100">
+      <!-- <h5 class="card-header bg-transparent border-0"><%= comment.user.username %></h5> -->
+      <!-- <div class="card-header bg-transparent border-0 mb-0">
+        <h5 class=""><%= comment.user.username %></h5>
+      </div> -->
+      <div class="card-body bg-transparent pb-2">
+        <div class="d-flex flex-row">
+            <i class="fas fa-user-tie fa-2x me-2 mb-1"></i>
+          <h5 class=""><%= comment.user.username %></h5>
+
+        </div>
+
+        <p class="m-0"><%= comment.date %></p>
         <p class="card-text comment-text"><%= comment.text %></p>
       </div>
       <div class="card-footer bg-transparent border-0">
@@ -106,7 +114,7 @@
           <% } else { %>
             <button class="<%=comment._id%> upvote_btn btn btn-outline-success btn-sm me-1 p-0" disabled>
           <% } %>
-            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-arrow-up-short" viewBox="0 0 16 16">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-up-short" viewBox="0 0 16 16">
               <path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5z"/>
             </svg>
           </button>
@@ -120,7 +128,7 @@
           <% } else { %>
             <button class="downvote_btn btn btn-outline-danger btn-sm ms-1 p-0" disabled>
           <% } %>
-            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-arrow-down-short" viewBox="0 0 16 16">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-down-short" viewBox="0 0 16 16">
               <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4z"/>
             </svg>
           </button>
@@ -129,19 +137,28 @@
               <!-- <p> -->
 
               <span class="align-items-center" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit comment">
-                <button class="btn btn-sm btn-light p-0 ms-1" type="button" data-bs-toggle="collapse" data-bs-target="#<%= collapseId %>" aria-expanded="false" aria-controls="<%= collapseId %>">
-                  <i class="fas fa-edit fa-lg"></i>
+                <button class="btn btn-sm btn-light bg-transparent border-0 p-0 ms-1" type="button" data-bs-toggle="collapse" data-bs-target="#<%= collapseId %>" aria-expanded="false" aria-controls="<%= collapseId %>">
+                  <!-- <i class="fas fa-edit fa-lg"></i> -->
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                    <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+                  </svg>
+                  Edit
                 </button>
               </span>
 
               <!-- </p> -->
-              <span data-bs-toggle="tooltip" data-bs-placement="top" title="Delete comment">
-                <form class="mt-1 mb-0 ms-1" action="/cities/<%= city._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
-                  <button class="btn btn-sm btn-light p-0">
-                    <i class="fas fa-trash-alt fa-lg"></i>
+              <!-- <span data-bs-toggle="tooltip" data-bs-placement="top" title="Delete comment"> -->
+                <form class="mt-0 mb-0 ms-1" action="/cities/<%= city._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
+                  <button class="btn btn-sm btn-light bg-transparent border-0 p-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete comment">
+                    <!-- <i class="fas fa-trash-alt fa-lg"></i> -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                      <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                      <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                    </svg>
+                    Delete
                   </button>
                 </form>
-              </span>
+              <!-- </span> -->
 
             <!-- </div> -->
 
