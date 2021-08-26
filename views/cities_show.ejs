@@ -78,10 +78,13 @@
 
   <% let x = 0; %>
   <% let collapseId = ""; %>
+  <div class="row">
+    <div class="col-6">
   <% comments.forEach((comment) => { %>
 
     <% collapseId = "collapseExample" + x; %>
-    <div class="card shadow mb-2 w-100">
+
+    <div class="card col-6 shadow mb-2 w-100">
       <!-- <h5 class="card-header bg-transparent border-0"><%= comment.user.username %></h5> -->
       <!-- <div class="card-header bg-transparent border-0 mb-0">
         <h5 class=""><%= comment.user.username %></h5>
@@ -168,7 +171,19 @@
       </div>
     </div>
   <% x++; }) %>
+    </div>
+    <div class="col-6">
+      <div
+        data-skyscanner-widget="SearchWidget"
+        data-locale="en-GB"
+        data-market="US"
+        data-currency="USD"
+        ></div>
+<script src="https://widgets.skyscanner.net/widget-server/js/loader.js" async></script>
+    </div>
+  </div>
   <div class="py-5"></div>
+
 </div>
 <script>
   var cityId = "<%- city._id %>"
