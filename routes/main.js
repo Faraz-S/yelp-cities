@@ -13,7 +13,8 @@ router.post("/account/watchlist", isLoggedIn, async (req, res) => {
   req.user.watchlist.push(city);
   req.user.save();
   req.flash("success", "Added to watchlist!");
-  res.redirect(`/cities/${req.body.cityId}`);
+  // res.redirect(`/cities/${req.body.cityId}`);
+  res.redirect('back');
 })
 
 router.get("/account/watchlist", isLoggedIn, async (req, res) => {
@@ -24,7 +25,8 @@ router.delete("/account/watchlist", isLoggedIn, async (req, res) => {
   req.user.watchlist.splice(req.user.watchlist.findIndex(i => i._id.equals(req.body.cityId)), 1);
   req.user.save();
   req.flash("success", "Deleted from watchlist!");
-  res.redirect(`/cities/${req.body.cityId}`);
+  // res.redirect(`/cities/${req.body.cityId}`);
+  res.redirect('back');
 })
 
 router.get("/account", isLoggedIn,(req, res) => {

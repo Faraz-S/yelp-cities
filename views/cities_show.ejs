@@ -30,27 +30,28 @@
     <!-- <a href="#" class="col-3">
       <button type="button" id="watchlist_btn" class="btn btn-success btn-lg mt-3 mb-4">Add To Watchlist</button>
     </a> -->
-    <% if(user && user.watchlist.some(e => e._id.equals(city._id))) { %>
-      <form class="col-2" action="/account/watchlist?_method=DELETE" method="POST">
+    <div class="d-flex flex-row mt-2">
+     <!-- if(user && user.watchlist.some(e => e._id.equals(city._id))) {  -->
+    <% if(user && user.watchlist.find(e => e._id.equals(city._id))) { %>
+      <form action="/account/watchlist?_method=DELETE" method="POST">
         <input type="hidden" name="cityId" value="<%= city._id %>">
         <button type="submit" class="btn btn-danger btn-lg">Delete From Watchlist</button>
       </form>
     <% } else { %>
-      <form class="col-2" action="/account/watchlist" method="POST">
+      <form class="mb-2" action="/account/watchlist" method="POST">
         <input type="hidden" name="cityId" value="<%= city._id %>">
         <button type="submit" class="btn btn-success btn-lg">Add To Watchlist</button>
       </form>
     <% } %>
     <% if(user && user.username === city.owner.username) { %>
-      <div class="col-2">
-        <div class="d-flex flex-row">
+      <!-- <div class=""> -->
           <a href="/cities/<%= city._id %>/edit">
-            <button class="btn btn-outline-info btn-lg btn-block mx-2">Edit</button>
+            <button class="btn btn-outline-primary btn-lg btn-block mx-2">Edit</button>
           </a>
-          <form action="/cities/<%= city._id %>?_method=DELETE" method="POST">
+          <form class="m-0" action="/cities/<%= city._id %>?_method=DELETE" method="POST">
             <button type="submit" class="btn btn-outline-danger btn-lg">Delete</button>
           </form>
-        </div>
+        <!-- </div> -->
       </div>
     <% } %>
   </div>
