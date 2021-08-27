@@ -3,13 +3,16 @@
 
     <div class="container">
       <div class="row mt-2">
+      <% if(cities.length == 0) { %>
+        <h1>Hey <%= user.username%>, your watchlist is empty</h1>
+      <% } %>
       <% cities.forEach ((city) => { %>
-        <div class="card mx-3 my-3 p-0">
+        <div class="card border-light shadow-lg mx-3 my-3 p-0">
           <a href="/cities/<%= city._id %>">
             <img class="card-img card-img-top" src="<%= city.image %>" alt="Picture of the city">
           </a>
-          <h3 class="card-title mt-3 text-capitalize"><%= city.name %></h3>
-          <p class="card-text mb-3 mx-3"><%= city.description %></p>
+          <h3 class="card-title mt-3 mb-2 text-capitalize"><%= city.name %></h3>
+          <!-- <p class="card-text mb-3 mx-3"><%= city.description %></p> -->
         </div>
       <% })%>
       </div>
