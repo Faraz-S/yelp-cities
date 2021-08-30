@@ -80,18 +80,6 @@ const handleVote = (newScore, code, bs) => {
 // ====================
 // ADD EVENT LISTENERS
 // ====================
-// for(let i = 0; i < upvoteBtns.length; i++) {
-//   b = upvoteBtns[i];
-//   b.addEventListener("click", async function() {
-//     sendVote("up", scores[i]);
-//   });
-// }
-//
-// for(let j = 0; j < downvoteBtns.length; j++) {
-//   downvoteBtns[j].addEventListener("click", async function() {
-//     sendVote("down", scores[j]);
-//   });
-// }
 
 for(let i = 0; i < btns.length; i++) {
   btns[i].children[0].addEventListener("click", async function() {
@@ -101,4 +89,16 @@ for(let i = 0; i < btns.length; i++) {
   btns[i].children[2].addEventListener("click", async function() {
     sendVote("down", btns[i].children);
   })
+}
+
+// ====================
+// MAPS
+// ====================
+let map;
+
+async function initMap() {
+  map = await new google.maps.Map(document.getElementById("map"), {
+    center: { lat: parseFloat(latitude), lng: parseFloat(longitude) },
+    zoom: 12,
+  });
 }

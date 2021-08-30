@@ -197,6 +197,11 @@
         data-currency="USD"
         ></div>
 <script src="https://widgets.skyscanner.net/widget-server/js/loader.js" async></script>
+      <div class="mt-3" id="map"></div>
+      <script
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDexia7M28M4_TZnHWX-px4UfPHJg-1q6k&callback=initMap&libraries=&v=weekly&channel=2"
+  async
+></script>
     </div>
   </div> <!--- End row --->
   <div class="py-5"></div>
@@ -204,6 +209,8 @@
 </div>
 <script>
   var cityId = "<%- city._id %>"
+  var latitude = "<%- data.location.lat %>"
+  var longitude = "<%- data.location.lon %>"
 </script>
 <script src="/js/cities_show.js"></script>
 <%- include("partials/footer") %>
