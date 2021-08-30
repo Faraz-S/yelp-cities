@@ -199,7 +199,8 @@
 <script src="https://widgets.skyscanner.net/widget-server/js/loader.js" async></script>
       <div class="mt-3" id="map"></div>
       <script
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDexia7M28M4_TZnHWX-px4UfPHJg-1q6k&callback=initMap&libraries=&v=weekly&channel=2"
+  src="<%=`https://maps.googleapis.com/maps/api/js?key=${process.env.MAPSAPI_KEY}&callback=initMap&libraries=&v=weekly&channel=2`%>"
+
   async
 ></script>
     </div>
