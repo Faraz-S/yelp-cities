@@ -1,11 +1,6 @@
 // ====================
 // SELECT ELEMENTS
 // ====================
-// const upvoteBtns = document.getElementsByClassName("upvote_btn");
-// const downvoteBtns = document.getElementsByClassName("downvote_btn");
-// const scores = document.getElementsByClassName("score");
-// const watchlistBtn = document.getElementById("watchlist_btn");
-
 const btns = document.getElementsByClassName("voting");
 
 // ====================

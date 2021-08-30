@@ -37,21 +37,6 @@ const seed = async () => {
 
   await Comment.deleteMany();
   console.log("Deleted all the comments");
-
-  // // Create three new cities
-  // for (const city_seed of city_seeds) {
-  //   let city = await City.create(city_seed);
-  //   console.log("Created a new city: ", city.name);
-  //   // Create a new comment for each city
-  //   await Comment.create({
-  //     text: "Comment1",
-  //     user: "User1",
-  //     cityId: city._id
-  //   })
-  //   console.log("Created a new comment")
-  // }
-
-
 }
 
 module.exports = seed;

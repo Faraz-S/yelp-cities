@@ -88,10 +88,6 @@ router.delete("/:commentId", checkCommentOwner, async (req, res) => {
 // Vote
 router.post("/vote", isLoggedIn, async (req, res) => {
   console.log("Request body: ", req.body);
-  // {
-  //   cityId: "abc123",
-  //   voteType: "up" or "down"
-  // }
 
   const cmntId = mongoose.Types.ObjectId(req.body.commentId);
   const comment = await Comment.findById(cmntId);

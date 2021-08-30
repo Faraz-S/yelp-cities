@@ -18,7 +18,7 @@ router.post('/signup', async (req, res) => {
       email: req.body.email,
       watchlist: []
     }), req.body.password);
-    // console.log(newUser);
+    
     req.flash("success", `Signed up as ${newUser.username}`);
 
     passport.authenticate('local')(req, res, () => {

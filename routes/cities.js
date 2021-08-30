@@ -51,8 +51,6 @@ router.post("/", isLoggedIn, async (req, res) => {
       id: req.user._id,
       username: req.user.username
     }
-    // upvotes: [req.user.username],
-    // downvotes: []
   }
 
   try {
@@ -64,16 +62,6 @@ router.post("/", isLoggedIn, async (req, res) => {
     req.flash("error", "Error creating city")
     res.redirect("/cities");
   }
-  // City.create(newCity)
-  // .then((city) => {
-  //   console.log(city)
-  //   res.redirect("/cities/" + city._id)
-  // })
-  // .catch((err) => {
-  //   console.log(err)
-  //   res.send(err)
-  // })
-
 })
 
 // New Route
@@ -116,10 +104,6 @@ router.get("/region/:region", async (req, res) => {
 // Vote
 router.post("/vote", isLoggedIn, async (req, res) => {
   console.log("Request body: ", req.body);
-  // {
-  //   cityId: "abc123",
-  //   voteType: "up" or "down"
-  // }
 
   const city = await City.findById(req.body.cityId);
   const alreadyUpvoted = city.upvotes.indexOf(req.user.username);
@@ -188,7 +172,6 @@ router.get("/:id", async (req, res) => {
       .catch((err) => {
         res.send(err);
       })
-      // res.render("cities_show", {city, comments, cityId: req.params.id});
   } catch (err) {
     console.log(err);
     res.send(err);
@@ -200,13 +183,6 @@ router.get("/:id/edit", checkCityOwner, async (req, res) => {
   const city = await City.findById(req.params.id).exec();
   res.render("cities_edit", {city});
 })
-//   // Get the city from the DB
-//   City.findById(req.params.id)
-//   .exec()
-//   .then((city) => {
-//     // Render the edit form, passing in that city
-//     res.render("cities_edit", {city})
-//   })
 
 
 // Update Route
@@ -232,41 +208,19 @@ router.put("/:id", checkCityOwner, async (req, res) => {
     req.flash("error", "Error updating city")
     res.redirect("/cities");
   }
-
-  // City.findByIdAndUpdate(req.params.id, city, {new: true})
-  // .exec()
-  // .then((updatedCity) => {
-  //   console.log(updatedCity);
-  //   res.redirect(`/cities/${req.params.id}`);
-  // })
-  // .catch((err) => {
-  //   res.send(err);
-  // })
 })
 
 // Delete Route
 router.delete("/:id", checkCityOwner, async (req, res) => {
   try {
     const deletedCity = await City.findByIdAndDelete(req.params.id).exec()
-    // console.log("Deleted: ", deletedCity);
     req.flash("success", "City deleted!");
     res.redirect("/cities")
-
   } catch (err) {
     console.log(err);
     req.flash("error", "Error deleting city");
     res.redirect("back");
   }
-
-  // City.findByIdAndDelete(req.params.id)
-  // .exec()
-  // .then((deletedCity) => {
-  //   console.log("Deleted: ", deletedCity);
-  //   res.redirect("/cities")
-  // })
-  // .catch((err) => {
-  //   res.send(err);
-  // })
 })
 
 module.exports = router;
