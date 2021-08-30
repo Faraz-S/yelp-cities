@@ -7,9 +7,9 @@ const checkCommentOwner = require('../utils/checkCommentOwner');
 const mongoose = require('mongoose');
 
 // New Comment - Show Form
-router.get("/new", isLoggedIn, (req, res) => {
-  res.render("comments_new", {cityId: req.params.id})
-})
+// router.get("/new", isLoggedIn, (req, res) => {
+//   res.render("comments_new", {cityId: req.params.id})
+// })
 
 // Create Comment - Actually Update DB
 router.post("/", isLoggedIn, async (req, res) => {
@@ -44,18 +44,18 @@ router.post("/", isLoggedIn, async (req, res) => {
 })
 
 // Edit Comment - Show the edit Form
-router.get("/:commentId/edit", checkCommentOwner, async (req, res) => {
-  try {
-    const city = await City.findById(req.params.id).exec();
-    const comment = await Comment.findById(req.params.commentId).exec();
-    console.log("city:", city);
-    console.log("comment:", comment);
-    res.render("comments_edit", {city, comment});
-  } catch(err) {
-    console.log(err);
-    res.send("Broken ... Comment Edit GET")
-  }
-})
+// router.get("/:commentId/edit", checkCommentOwner, async (req, res) => {
+//   try {
+//     const city = await City.findById(req.params.id).exec();
+//     const comment = await Comment.findById(req.params.commentId).exec();
+//     console.log("city:", city);
+//     console.log("comment:", comment);
+//     res.render("comments_edit", {city, comment});
+//   } catch(err) {
+//     console.log(err);
+//     res.send("Broken ... Comment Edit GET")
+//   }
+// })
 
 // Update Comment - Actually update in DB
 router.put("/:commentId", checkCommentOwner, async (req, res) => {
